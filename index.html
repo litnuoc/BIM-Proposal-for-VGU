@@ -60,6 +60,16 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #64748b; /* slate-500 */
         }
+        /* --- Taxonomy tree --- */
+        .taxo-tree summary { list-style: none; cursor: pointer; }
+        .taxo-tree summary::-webkit-details-marker { display: none; }
+        .taxo-l1 { background: #ffffff; border-left: 4px solid var(--acc); }
+        .taxo-l1 > summary { border-top-right-radius: 0.5rem; }
+        .taxo-chev { transition: transform 0.15s ease; }
+        details[open] > summary .taxo-chev { transform: rotate(90deg); }
+        .taxo-kids { margin-left: 1rem; border-left: 1px solid #e2e8f0; padding-left: 0.75rem; }
+        .taxo-node:hover { background: #f8fafc; border-radius: 0.375rem; }
+        .taxo-node { transition: background 0.12s; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -76,9 +86,10 @@
             </div>
         </header>
 
-        <nav class="flex justify-center space-x-2 md:space-x-4 mb-10 p-2 bg-slate-100 rounded-full max-w-md mx-auto shadow-inner">
+        <nav class="flex justify-center space-x-2 md:space-x-4 mb-10 p-2 bg-slate-100 rounded-full max-w-2xl mx-auto shadow-inner">
             <button id="nav-proposal" class="main-nav-btn flex-1 px-4 py-2 rounded-full text-cyan-700 font-semibold" data-lang-key="navProposal">Proposal</button>
             <button id="nav-dashboard" class="main-nav-btn flex-1 px-4 py-2 rounded-full text-cyan-700 font-semibold active" data-lang-key="navDashboard">Báo cáo Tiến độ</button>
+            <button id="nav-taxonomy" class="main-nav-btn flex-1 px-4 py-2 rounded-full text-cyan-700 font-semibold" data-lang-key="navTaxonomy">Phân cấp Định danh</button>
         </nav>
 
         <div id="app-container">
@@ -318,6 +329,233 @@
                 </main>
             </section>
 
+            <section id="taxonomy-page" class="hidden">
+                <h2 class="text-2xl md:text-3xl font-bold text-cyan-800 text-center mb-2" data-lang-key="taxonomyTitle">Phân cấp Định danh Phòng ốc</h2>
+                <p class="text-center text-slate-600 mb-8 max-w-3xl mx-auto" data-lang-key="taxonomySubtitle">Hệ thống mã định danh cơ sở vật chất theo 4 cấp: Khối chính (Level 1) &rarr; Nhánh (Level 2A) &rarr; Phân loại (Level 2B) &rarr; Chi tiết (Level 3). Mỗi nút hiển thị mã tiếng Anh kèm mô tả tiếng Việt.</p>
+
+                <div class="p-6 bg-white rounded-xl shadow-md">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-600">
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#0891b2"></span><span data-lang-key="taxoLegendAcademic">Học tập / Kỹ thuật</span></span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#0d9488"></span><span data-lang-key="taxoLegendSupport">Phục vụ / Nội trú</span></span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style="background:#d97706"></span><span data-lang-key="taxoLegendAdmin">Hành chính / Quốc phòng</span></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="taxo-expand" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-cyan-600 text-white hover:bg-cyan-700 transition-colors" data-lang-key="taxoExpandAll">Mở tất cả</button>
+                            <button id="taxo-collapse" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-slate-200 text-slate-700 hover:bg-slate-300 transition-colors" data-lang-key="taxoCollapseAll">Thu gọn</button>
+                        </div>
+                    </div>
+<div class="taxo-tree">
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#0891b2">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">1. ACADEMIC</span><span class="text-xs text-slate-500">Khối học tập - thí nghiệm</span></summary>
+<div class="taxo-kids py-1">
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">CLASSROOM/ SEMINAR</span><span class="text-xs text-slate-500">Phòng học thông thường dưới 100 chỗ</span></summary>
+<div class="taxo-kids py-1">
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Classroom.S</span><span class="text-xs text-slate-500">Phòng học (dưới 25 chỗ)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Computer</span><span class="text-xs text-slate-500">Phòng học máy tính</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Language</span><span class="text-xs text-slate-500">Phòng học ngoại ngữ</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Art</span><span class="text-xs text-slate-500">Phòng học nhạc họa</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">MultiFunction</span><span class="text-xs text-slate-500">Phòng học đa năng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Other</span><span class="text-xs text-slate-500">Phòng học khác</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Classroom.M</span><span class="text-xs text-slate-500">Phòng học (từ 25 đến dưới 75 chỗ)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Computer</span><span class="text-xs text-slate-500">Phòng học máy tính</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Language</span><span class="text-xs text-slate-500">Phòng học ngoại ngữ</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Art</span><span class="text-xs text-slate-500">Phòng học nhạc họa</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">MultiFunction</span><span class="text-xs text-slate-500">Phòng học đa năng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Other</span><span class="text-xs text-slate-500">Phòng học khác</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Classroom.L</span><span class="text-xs text-slate-500">Phòng học (từ 75 đến dưới 100 chỗ)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Computer</span><span class="text-xs text-slate-500">Phòng học máy tính</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Language</span><span class="text-xs text-slate-500">Phòng học ngoại ngữ</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Art</span><span class="text-xs text-slate-500">Phòng học nhạc họa</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">MultiFunction</span><span class="text-xs text-slate-500">Phòng học đa năng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Other</span><span class="text-xs text-slate-500">Phòng học khác</span></div>
+</div></details>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">LECTURE POD</span><span class="text-xs text-slate-500">Giảng đường (từ 100 chỗ trở lên)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Lecture Hall O100</span><span class="text-xs text-slate-500">Giảng đường (từ 100 chỗ trở lên)</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Lecture Pod O200</span><span class="text-xs text-slate-500">Giảng đường (từ 200 chỗ trở lên)</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">LABORATORY</span><span class="text-xs text-slate-500">Phòng thí nghiệm</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Chemistry and Physics Laboratory</span><span class="text-xs text-slate-500">Phòng lab thí nghiệm hóa học, vật lý</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Medical Laboratory (hoặc Clinical Laboratory)</span><span class="text-xs text-slate-500">Phòng thí nghiệm y tế</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Public Health Laboratory</span><span class="text-xs text-slate-500">Phòng thí nghiệm y tế công cộng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Pharmaceutical and Special Technology Research &amp; Production Laboratory</span><span class="text-xs text-slate-500">Phòng thí nghiệm nghiên cứu và sản xuất các loại thuốc hoặc các công nghệ đặc biệt</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Media Laboratory</span><span class="text-xs text-slate-500">Phòng thí nghiệm phương tiện truyền thông</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Research and Educational Laboratory</span><span class="text-xs text-slate-500">Phòng thí nghiệm nghiên cứu, học tập</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Film Laboratory or Darkroom</span><span class="text-xs text-slate-500">Phòng lab chiếu phim hoặc phòng tối</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Computer Laboratory</span><span class="text-xs text-slate-500">Phòng thí nghiệm máy tính</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Clandestine Laboratory for Illegal Drugs or Technologies</span><span class="text-xs text-slate-500">Phòng thí nghiệm bí mật để sản xuất các loại thuốc hoặc các công nghệ bất hợp pháp</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">STEM Laboratory</span><span class="text-xs text-slate-500">Phòng lab STEM</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">WORKSHOP</span><span class="text-xs text-slate-500">Xưởng thực hành / vườn, trại thực nghiệm</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Education Sciences and Teacher Training</span><span class="text-xs text-slate-500">Khoa học giáo dục và đào tạo giáo viên</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Arts</span><span class="text-xs text-slate-500">Nghệ thuật</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Humanities</span><span class="text-xs text-slate-500">Nhân văn</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Social and Behavioral Sciences</span><span class="text-xs text-slate-500">Khoa học xã hội và hành vi</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Journalism and Information</span><span class="text-xs text-slate-500">Báo chí và thông tin</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Business and Management</span><span class="text-xs text-slate-500">Kinh doanh và quản lý</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Law</span><span class="text-xs text-slate-500">Pháp luật</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Life Sciences</span><span class="text-xs text-slate-500">Khoa học sự sống</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Natural Sciences</span><span class="text-xs text-slate-500">Khoa học tự nhiên</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Mathematics and Statistics</span><span class="text-xs text-slate-500">Toán và thống kê</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Computing and Information Technology</span><span class="text-xs text-slate-500">Máy tính và công nghệ thông tin</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Engineering Technology</span><span class="text-xs text-slate-500">Công nghệ kỹ thuật</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Engineering</span><span class="text-xs text-slate-500">Kỹ thuật</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Manufacturing and Processing</span><span class="text-xs text-slate-500">Sản xuất và chế biến</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Architecture and Construction</span><span class="text-xs text-slate-500">Kiến trúc và xây dựng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Agriculture, Forestry and Fisheries</span><span class="text-xs text-slate-500">Nông, lâm nghiệp và thủy sản</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Veterinary Medicine</span><span class="text-xs text-slate-500">Thú y</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Health</span><span class="text-xs text-slate-500">Sức khỏe</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Social Services</span><span class="text-xs text-slate-500">Dịch vụ xã hội</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Tourism, Hospitality, Sports and Personal Services</span><span class="text-xs text-slate-500">Du lịch, khách sạn, thể thao và dịch vụ cá nhân</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Transport Services</span><span class="text-xs text-slate-500">Dịch vụ vận tải</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Environment and Environmental Protection</span><span class="text-xs text-slate-500">Môi trường và bảo vệ môi trường</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Security and Defense</span><span class="text-xs text-slate-500">An ninh, quốc phòng</span></div>
+</div></details>
+</div></details>
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#0d9488">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">2. ACADEMIC_SUPPORT</span><span class="text-xs text-slate-500">Khối phục vụ học tập</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">LIBRARY</span><span class="text-xs text-slate-500">Thư viện</span></div>
+<details open class="taxo-branch" style="--acc:#0d9488">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">AUDITORIUM</span><span class="text-xs text-slate-500">Hội trường (từ 250 chỗ trở lên)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Table</span><span class="text-xs text-slate-500">Hội trường có bàn viết</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Non-Table</span><span class="text-xs text-slate-500">Hội trường không có bàn viết</span></div>
+</div></details>
+</div></details>
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#d97706">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">3. ADMINISTRATION</span><span class="text-xs text-slate-500">Khối hiệu bộ - hành chính</span></summary>
+<div class="taxo-kids py-1">
+<details open class="taxo-branch" style="--acc:#d97706">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">OFFICE</span><span class="text-xs text-slate-500">Hội đồng nhà trường</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">UniversityCouncil</span><span class="text-xs text-slate-500">Hội đồng nhà trường</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">PrincipalBoard</span><span class="text-xs text-slate-500">Phòng làm việc của Ban giám hiệu (gồm hiệu trưởng, các phó hiệu trưởng, giám đốc, các phó giám đốc)</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Professor</span><span class="text-xs text-slate-500">Phòng làm việc của giáo sư và phó giáo sư</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Faculty</span><span class="text-xs text-slate-500">Phòng làm việc của các khoa và bộ môn trực thuộc trường</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Administration</span><span class="text-xs text-slate-500">Phòng, ban đoàn thể</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#d97706">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">MEETING</span><span class="text-xs text-slate-500">Phòng họp của cán bộ giảng dạy</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Faculty</span><span class="text-xs text-slate-500">Phòng họp của cán bộ giảng dạy</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#d97706">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">FUNCTION OFFICE</span><span class="text-xs text-slate-500">Phòng chức năng khác (hành chính - tổng hợp, tổ chức, cán bộ, đào tạo đại học và sau đại học, khoa học và công nghệ, công tác chính trị, kế hoạch - tài chính…)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Meeting</span><span class="text-xs text-slate-500">Phòng họp</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Data Input</span><span class="text-xs text-slate-500">Phòng nhập liệu-ASA</span></div>
+</div></details>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">MEDICAL CENTER</span><span class="text-xs text-slate-500">Trạm y tế</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">PARKING</span><span class="text-xs text-slate-500">Nhà để xe cho cán bộ giảng dạy, sinh viên, và cán bộ khác</span></div>
+<details open class="taxo-branch" style="--acc:#d97706">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">RESTROOM</span><span class="text-xs text-slate-500">Nhà vệ sinh</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Male</span><span class="text-xs text-slate-500">Nam</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Female</span><span class="text-xs text-slate-500">Nữ</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Handicape</span><span class="text-xs text-slate-500">Người Khuyết tật</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Janitor</span><span class="text-xs text-slate-500">Khu để dụng cụ vệ sinh</span></div>
+</div></details>
+</div></details>
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#0891b2">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">4. SPORT</span><span class="text-xs text-slate-500">Khu thể dục thể thao</span></summary>
+<div class="taxo-kids py-1">
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">INSIDE</span><span class="text-xs text-slate-500">Công trình thể thao có mái che</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Multipurpose Sports Hall / Indoor Arena</span><span class="text-xs text-slate-500">Nhà thi đấu đa năng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Multipurpose Gymnasium / Training Hall</span><span class="text-xs text-slate-500">Nhà tập đa năng</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">OUTSIDE</span><span class="text-xs text-slate-500">Công trình thể thao ngoài trời</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Swimming Pool</span><span class="text-xs text-slate-500">Bể bơi</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Volleyball Court</span><span class="text-xs text-slate-500">Sân bóng chuyền</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Football Pitch / Soccer Field</span><span class="text-xs text-slate-500">Sân bóng đá</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Badminton Court</span><span class="text-xs text-slate-500">Sân cầu lông</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2B</span><span class="font-mono text-slate-800 text-[13px] font-medium">Tennis Court</span><span class="text-xs text-slate-500">Sân Tenis</span></div>
+</div></details>
+</div></details>
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#0d9488">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">5. RESIDENTIAL</span><span class="text-xs text-slate-500">Khu nội trú</span></summary>
+<div class="taxo-kids py-1">
+<details open class="taxo-branch" style="--acc:#0d9488">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">DORMITORY</span><span class="text-xs text-slate-500">Nhà ở sinh viên (ký túc xá)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Bachelor</span><span class="text-xs text-slate-500">Cử nhân</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Master</span><span class="text-xs text-slate-500">Thạc Sĩ</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Phd</span><span class="text-xs text-slate-500">Tiến Sĩ</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0d9488">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">SCHOLAR ACCOMMODATION</span><span class="text-xs text-slate-500">Nhà ở công vụ cho cán bộ giảng dạy</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Guest House</span><span class="text-xs text-slate-500">Khu nhà Khách</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Villa</span><span class="text-xs text-slate-500">Khu Villa</span></div>
+</div></details>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">CANTEEN</span><span class="text-xs text-slate-500">Nhà ăn</span></div>
+<details open class="taxo-branch" style="--acc:#0d9488">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">SERVICE</span><span class="text-xs text-slate-500">Các công trình dịch vụ công cộng (cửa hàng giải khát; cửa hàng bán lẻ; cắt tóc, gội đầu; cửa hàng sách báo, tem thư, bưu điện; cửa hàng cắt may…)</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Convenient Store</span><span class="text-xs text-slate-500">Cửa hàng tiện lợi</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0d9488">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Laundry Room</span><span class="text-xs text-slate-500">Khu giặt</span></div>
+</div></details>
+</div></details>
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#d97706">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">6. NATIONAL_DEFENCE</span><span class="text-xs text-slate-500">Các công trình dành cho hoạt động giáo dục quốc phòng</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">NATIONAL DEFENSE EDUCATION GROUNDS</span><span class="text-xs text-slate-500">Sân hoạt động giáo dục quốc phòng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#d97706">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">TECHNICAL TRAINING GROUND</span><span class="text-xs text-slate-500">Thao trường kỹ thuật</span></div>
+</div></details>
+<details open class="taxo-l1 rounded-lg mb-3 shadow-sm" style="--acc:#0891b2">
+<summary class="flex items-center gap-2 flex-wrap px-3 py-2.5"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">L1</span><span class="font-mono text-slate-800 font-semibold text-sm">7. TECHNICAL_AREA</span><span class="text-xs text-slate-500">Khối kĩ thuật giao thông</span></summary>
+<div class="taxo-kids py-1">
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">CIRCULATION</span><span class="text-xs text-slate-500">Giao thông nội bộ</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Corridor</span><span class="text-xs text-slate-500">Hành lang</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Vestibule</span><span class="text-xs text-slate-500">Tiền sảnh / Khoảng đệm (khu vực chuyển tiếp trước khi vào sảnh chính)</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Stairs</span><span class="text-xs text-slate-500">Cầu thang / Thang bộ</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Lobby</span><span class="text-xs text-slate-500">Sảnh chính / Sảnh tiếp đón</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Lounge</span><span class="text-xs text-slate-500">Khu vực nghỉ ngơi / Phòng chờ thư giãn</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Elevator</span><span class="text-xs text-slate-500">Thang máy</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">MEP</span><span class="text-xs text-slate-500">Phòng Kỹ thuật</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Electrical</span><span class="text-xs text-slate-500">Phòng kỹ thuật điện</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Server</span><span class="text-xs text-slate-500">Phòng máy chủ (Server)</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Generator</span><span class="text-xs text-slate-500">Phòng máy phát điện</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Maintenance</span><span class="text-xs text-slate-500">Phòng bảo trì / Khu vực bảo dưỡng</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Mechaincal</span><span class="text-xs text-slate-500">Phòng kỹ thuật cơ / Phòng máy</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Water</span><span class="text-xs text-slate-500">Phòng cấp nước / Trạm bơm nước</span></div>
+</div></details>
+<details open class="taxo-branch" style="--acc:#0891b2">
+<summary class="taxo-node flex items-center gap-2 flex-wrap py-1 px-1"><svg class="taxo-chev inline-block w-3.5 h-3.5 text-slate-400 flex-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">2A</span><span class="font-mono text-slate-800 text-[13px] font-medium">STORAGE</span><span class="text-xs text-slate-500">Kho</span></summary>
+<div class="taxo-kids py-1">
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Equipment</span><span class="text-xs text-slate-500">Kho Thiết bị</span></div>
+<div class="taxo-node flex items-center gap-2 flex-wrap py-1 pl-6 pr-1"><span class="taxo-badge flex-none text-[10px] font-semibold text-white rounded-full px-1.5 py-0.5 leading-none" style="background:#0891b2">3</span><span class="font-mono text-slate-800 text-[13px] font-medium">Central</span><span class="text-xs text-slate-500">Kho Trung tâm</span></div>
+</div></details>
+</div></details>
+</div>
+                </div>
+            </section>
+
         </div>
     </div>
 
@@ -329,6 +567,14 @@
                     mainTitle: "Dự án Quản lý Không gian Toàn diện",
                     navProposal: "Proposal",
                     navDashboard: "Báo cáo Tiến độ",
+                    navTaxonomy: "Phân cấp Định danh",
+                    taxonomyTitle: "Phân cấp Định danh Phòng ốc",
+                    taxonomySubtitle: "Hệ thống mã định danh cơ sở vật chất theo 4 cấp: Khối chính (Level 1) &rarr; Nhánh (Level 2A) &rarr; Phân loại (Level 2B) &rarr; Chi tiết (Level 3). Mỗi nút hiển thị mã tiếng Anh kèm mô tả tiếng Việt.",
+                    taxoLegendAcademic: "Học tập / Kỹ thuật",
+                    taxoLegendSupport: "Phục vụ / Nội trú",
+                    taxoLegendAdmin: "Hành chính / Quốc phòng",
+                    taxoExpandAll: "Mở tất cả",
+                    taxoCollapseAll: "Thu gọn",
                     proposalTitle: "Đề xuất Kế hoạch",
                     proposalSubtitle: "Mô tả chi tiết mục tiêu và phạm vi công việc của từng hạng mục trong dự án.",
                     indoorSectionTitle: "Không gian Trong nhà (Indoor)",
@@ -393,6 +639,14 @@
                     mainTitle: "Comprehensive Space Management Project",
                     navProposal: "Proposal",
                     navDashboard: "Progress Report",
+                    navTaxonomy: "Room Taxonomy",
+                    taxonomyTitle: "Facility Naming Taxonomy",
+                    taxonomySubtitle: "Facility identification codes across 4 levels: Main Block (Level 1) &rarr; Branch (Level 2A) &rarr; Category (Level 2B) &rarr; Detail (Level 3). Each node shows the English code with its Vietnamese description.",
+                    taxoLegendAcademic: "Academic / Technical",
+                    taxoLegendSupport: "Support / Residential",
+                    taxoLegendAdmin: "Administration / Defence",
+                    taxoExpandAll: "Expand all",
+                    taxoCollapseAll: "Collapse",
                     proposalTitle: "Project Proposal",
                     proposalSubtitle: "Detailed description of the objectives and scope for each item in the project.",
                     indoorSectionTitle: "Indoor Space",
@@ -497,20 +751,26 @@
             // --- NAVIGATION ---
             const navProposal = document.getElementById('nav-proposal');
             const navDashboard = document.getElementById('nav-dashboard');
+            const navTaxonomy = document.getElementById('nav-taxonomy');
             const proposalPage = document.getElementById('proposal-page');
             const dashboardPage = document.getElementById('dashboard-page');
-            const navButtons = [navProposal, navDashboard];
+            const taxonomyPage = document.getElementById('taxonomy-page');
+            const navButtons = [navProposal, navDashboard, navTaxonomy];
             const langBtnVi = document.getElementById('lang-vi');
             const langBtnEn = document.getElementById('lang-en');
 
             function switchPage(pageToShow) {
                 proposalPage.classList.add('hidden');
                 dashboardPage.classList.add('hidden');
+                taxonomyPage.classList.add('hidden');
                 navButtons.forEach(btn => btn.classList.remove('active'));
 
                 if (pageToShow === 'proposal') {
                     proposalPage.classList.remove('hidden');
                     navProposal.classList.add('active');
+                } else if (pageToShow === 'taxonomy') {
+                    taxonomyPage.classList.remove('hidden');
+                    navTaxonomy.classList.add('active');
                 } else {
                     dashboardPage.classList.remove('hidden');
                     navDashboard.classList.add('active');
@@ -606,6 +866,21 @@
             // --- EVENT LISTENERS & INITIALIZATION ---
             navProposal.addEventListener('click', () => switchPage('proposal'));
             navDashboard.addEventListener('click', () => switchPage('dashboard'));
+            navTaxonomy.addEventListener('click', () => switchPage('taxonomy'));
+
+            // --- Taxonomy expand/collapse controls ---
+            const taxoExpandBtn = document.getElementById('taxo-expand');
+            const taxoCollapseBtn = document.getElementById('taxo-collapse');
+            if (taxoExpandBtn) {
+                taxoExpandBtn.addEventListener('click', () => {
+                    taxonomyPage.querySelectorAll('details').forEach(d => d.open = true);
+                });
+            }
+            if (taxoCollapseBtn) {
+                taxoCollapseBtn.addEventListener('click', () => {
+                    taxonomyPage.querySelectorAll('details.taxo-l1').forEach(d => d.open = false);
+                });
+            }
             langBtnVi.addEventListener('click', () => setLanguage('vi'));
             langBtnEn.addEventListener('click', () => setLanguage('en'));
             
@@ -635,6 +910,3 @@
     </script>
 </body>
 </html>
-
-
-
